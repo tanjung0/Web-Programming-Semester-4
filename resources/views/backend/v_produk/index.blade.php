@@ -16,9 +16,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kategori</th>
+                                    <th>Penulis</th>
                                     <th>Status</th>
                                     <th>Nama Produk</th>
                                     <th>Harga</th>
+                                    <th>Diskon</th>
                                     <th>Stok</th>
                                     <th>Berat</th>
                                     <th>Aksi</th>
@@ -29,6 +31,7 @@
                                     <tr>
                                         <td> {{ $loop->iteration }}</td>
                                         <td> {{ $row->kategori->nama_kategori }} </td>
+                                        <td>{{ $row->user->nama }}</td>
                                         <td>
                                             @if ($row->status == 1)
                                                 <span class="badge badge-success"></i>
@@ -40,6 +43,8 @@
                                         </td>
                                         <td> {{ $row->nama_produk }} </td>
                                         <td> Rp. {{ number_format($row->harga, 0, ',', '.') }}
+                                        </td>
+                                        <td> Rp. {{ number_format($row->harga_lama, 0, ',', '.') }}
                                         </td>
                                         <td> {{ $row->stok }} </td>
                                         <td> {{ $row->berat }} Gram</td>

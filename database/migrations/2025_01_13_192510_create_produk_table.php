@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama_produk');
             $table->text('detail');
             $table->double('harga');
+            $table->double('harga_lama')->nullable();
             $table->integer('stok');
             $table->float('berat');
             $table->string('foto'); // Thumbnail image

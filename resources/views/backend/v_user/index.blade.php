@@ -15,8 +15,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Email</th>
                                     <th>Nama</th>
+                                    <th>Email</th>
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -35,6 +35,9 @@
                                             @elseif($row->role == 0)
                                                 <span class="badge badge-primary"></i>
                                                     Admin</span>
+                                            @elseif($row->role == 2)
+                                                <span class="badge badge-info"></i>
+                                                    Customer</span>
                                             @endif
                                         </td>
                                         <td>

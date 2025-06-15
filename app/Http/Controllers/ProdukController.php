@@ -44,6 +44,7 @@ class ProdukController extends Controller
             'nama_produk' => 'required|max:255|unique:produk',
             'detail' => 'required',
             'harga' => 'required',
+            'harga_lama' => 'nullable',
             'berat' => 'required',
             'stok' => 'required',
             'foto' => 'required|image|mimes:jpeg,jpg,png,gif|file|max:1024',
@@ -117,6 +118,7 @@ class ProdukController extends Controller
             'status' => 'required',
             'detail' => 'required',
             'harga' => 'required',
+            'harga_lama' => 'nullable',
             'berat' => 'required',
             'stok' => 'required',
             'foto' => 'image|mimes:jpeg,jpg,png,gif|file|max:1024',
@@ -276,13 +278,45 @@ class ProdukController extends Controller
         $tanggalAwal = $request->input('tanggal_awal');
         $tanggalAkhir = $request->input('tanggal_akhir');
         $query = Produk::whereBetween('updated_at', [$tanggalAwal, $tanggalAkhir])
-        ->orderBy('id', 'desc');
+            ->orderBy('id', 'desc');
         $produk = $query->get();
         return view('backend.v_produk.cetak', [
             'judul' => 'Laporan Produk',
             'tanggalAwal' => $tanggalAwal,
             'tanggalAkhir' => $tanggalAkhir,
             'cetak' => $produk
+        ]);
+    }
+    public function detail($id)
+    {
+        $fotoProdukTambahan = FotoProduk::where('produk_id', $id)->get();
+        $detail = Produk::findOrFail($id);
+        $kategori = Kategori::orderBy('nama_kategori', 'desc')->get();
+        return view('v_produk.detail', [
+            'judul' => 'Detail Produk',
+            'kategori' => $kategori,
+            'row' => $detail,
+            'fotoProdukTambahan' => $fotoProdukTambahan
+        ]);
+    }
+    public function produkKategori($id)
+    {
+        $kategori = Kategori::orderBy('nama_kategori', 'desc')->get();
+        $produk = Produk::where('kategori_id', $id)->where('status', 1)->orderBy('updated_at', 'desc')->paginate(6);
+        return view('v_produk.produkkategori', [
+            'judul' => 'Filter Kategori',
+            'kategori' => $kategori,
+            'produk' => $produk,
+        ]);
+    }
+    public function produkAll()
+    {
+        $kategori = Kategori::orderBy('nama_kategori', 'desc')->get();
+        $produk = Produk::where('status', 1)->orderBy('updated_at', 'desc')->paginate(6);
+        return view('v_produk.index', [
+            'judul' => 'Semua Produk',
+            'kategori' => $kategori,
+            'produk' => $produk,
         ]);
     }
 }

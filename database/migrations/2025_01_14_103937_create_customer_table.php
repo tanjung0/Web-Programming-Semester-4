@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('customer', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('hp', 13);
+            $table->unsignedBigInteger('user_id');
+            $table->string('google_id')->nullable();
+            $table->string('google_token')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('pos')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

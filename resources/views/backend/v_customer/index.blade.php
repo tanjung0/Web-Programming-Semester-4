@@ -1,11 +1,12 @@
 @extends('backend.v_layouts.app')
 @section('content')
     <!-- contentAwal -->
+
     <div class="row">
+
         <div class="col-12">
             <a href="{{ route('backend.customer.create') }}">
-                <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i>
-                    Tambah Customer</button>
+                <button type="button" class="btn btn-outline-primary">Tambah</button>
             </a>
             <div class="card">
                 <div class="card-body">
@@ -15,22 +16,31 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Customer</th>
-                                    <th>HP</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($index as $row)
                                     <tr>
                                         <td> {{ $loop->iteration }} </td>
-                                        <td> {{ $row->nama }} </td>
-                                        <td> {{ $row->hp }} </td>
+                                        <td> {{ $row->user->nama }} </td>
+                                        <td> {{ $row->user->email }} </td>
                                         <td>
+                                            <a href="{{ route('backend.customer.show', $row->id) }}" title="Detail Data">
+                                                <button type="button" class="btn btn-warning btn-sm"><i
+                                                        class="fas fa-eye"></i> Detail</button>
+                                            </a>
+
                                             <a href="{{ route('backend.customer.edit', $row->id) }}" title="Ubah Data">
                                                 <button type="button" class="btn btn-cyan btn-sm"><i
                                                         class="far fa-edit"></i> Ubah</button>
                                             </a>
-                                            <form method="POST" action="{{ route('backend.customer.destroy', $row->id) }}"
+
+                                            <form method="POST"
+                                                action="{{ route('backend.customer.destroy', $row->user->id) }}"
                                                 style="display: inline-block;">
                                                 @method('delete')
                                                 @csrf
@@ -44,9 +54,11 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+
     <!-- contentAkhir -->
 @endsection

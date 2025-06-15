@@ -115,6 +115,19 @@ hanyaAngka(event)" name="harga"
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label>Harga Lama</label>
+                                        <input type="text" onkeypress="return
+hanyaAngka(event)" name="harga_lama"
+                                            value="{{ old('harga_lama', $edit->harga_lama) }}"
+                                            class="form-control @error('harga_lama') is-invalid @enderror"
+                                            placeholder="Masukkan Harga Lama Produk">
+                                        @error('harga_lama')
+                                            <span class="invalid-feedback alert-danger" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label>Berat</label>
                                         <input type="text" onkeypress="return
 hanyaAngka(event)" name="berat"
