@@ -87,8 +87,10 @@
                                             class="fa fa-caret-down"></i></strong>
                                 </div>
                                 <ul class="custom-menu">
-                                    <li><a href="{{ route('customer.akun', ['id' => Auth::user()->id]) }}"><i class="fa fa-user-o"></i> Akun Saya</a></li>
-                                    <li><a href="{{ route('order.history') }}"><i class="fa fa-check"></i> History</a></li>
+                                    <li><a href="{{ route('customer.akun', ['id' => Auth::user()->id]) }}"><i
+                                                class="fa fa-user-o"></i> Akun Saya</a></li>
+                                    <li><a href="{{ route('order.history') }}"><i class="fa fa-check"></i> History</a>
+                                    </li>
                                     <li>
                                         <a href="#"
                                             onclick="event.preventDefault();
@@ -112,7 +114,7 @@
                                     </div>
                                     <strong class="text-uppercase">Akun Saya<i class="fa fa-caret-down"></i></strong>
                                 </div>
-                                <a href="{{ route('auth.redirect') }}" class="text-uppercase">Login</a>
+                                <a href="{{ route('backend.login') }}" class="text-uppercase">Login</a>
                             </li>
                             <!-- /Account -->
                         @endif
@@ -254,7 +256,7 @@
                             </div>
                             <div class="product-body">
                                 <h2 class="product-name"><a href="#">1 Set Poci Teh</a></h2>
-                                <h3 class="product-price">Rp.50.000 <del class="product-old-price">Rp65.000</del></h3>
+                                <h3 class="product-price">Rp.85.000 <del class="product-old-price">Rp90.000</del></h3>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -335,7 +337,7 @@
                         <!-- footer logo -->
                         <div class="footer-logo">
                             <a class="logo" href="#">
-                                <img src="{{asset ('frontend/img/logo.png')}}" alt="">
+                                <img src="{{ asset('frontend/img/logo.png') }}" alt="">
                             </a>
                         </div>
                         <!-- /footer logo -->
@@ -368,7 +370,7 @@
                         <h3 class="footer-header">Akun saya</h3>
                         <ul class="list-links">
                             <li><a href="{{ route('order.cart') }}">Keranjang</a></li>
-                            <li><a href="{{ route('auth.redirect') }}">Login</a></li>
+                            <li><a href="{{ route('order.history') }}">History Pesanan</a></li>
                         </ul>
                     </div>
                 </div>
@@ -380,19 +382,11 @@
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-header" id="kontak">kontak kami</h3>
-                        <ul style="font-size: 110%;">
-                            <li>Email: webgerabah@gmail.com</li><br>
-                            <li>Telp: 081234567891</li><br>
-                            <li>Alamat: Jl.Gerabah</li>
-                            <br>
-                        </ul>
-                        <ul class="footer-social">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        </ul>
+                        <a class="logo" href="https://wa.link/h7yfdf"
+                            style="border-radius: 10px;">
+                            <img src="{{ asset('image/logo_wa.jpg') }}" alt="Wa Logo" width="200">
+                        </a>
+
                         <!-- /footer social -->
                     </div>
                 </div>
@@ -405,7 +399,7 @@
                 <h3 class="map-title">Lokasi Toko</h3>
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3063.7556574133428!2d109.11842997363003!3d-6.864286093134256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb7613e508bbf%3A0x29b9f43bc3956608!2sUniversitas%20BSI%20Kampus%20Tegal!5e1!3m2!1sid!2sid!4v1744785536238!5m2!1sid!2sid"
-                    width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                    width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
@@ -445,8 +439,7 @@
     @stack('scripts')
     <!-- Midtrans -->
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-    data-client-key="{{ config('midtrans.client_key') }}">
-    </script>
+        data-client-key="{{ config('midtrans.client_key') }}"></script>
 </body>
 
 </html>

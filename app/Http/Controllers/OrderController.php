@@ -14,6 +14,36 @@ use Midtrans\Snap;
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        $order = Order::orderBy('updated_at', 'desc')->get();
+        return view('backend.v_pesanan.proses', [
+            'judul' => 'Pesanan',
+            'sub' => 'Halaman Pesanan',
+            'index' => $order
+        ]);
+    }
+    public function statusUpdate(Request $request, string $id)
+    {
+        $order = Order::findOrFail($id);
+        $rules = [
+            'alamat' => 'required',
+        ];
+        if ($request->status != $order->status) {
+            $rules['status'] = 'required';
+        }
+        if ($request->noresi != $order->noresi) {
+            $rules['noresi'] = 'required';
+        }
+        if ($request->pos != $order->pos) {
+            $rules['pos'] = 'required';
+        }
+        $validatedData = $request->validate($rules);
+        Order::where('id', $id)->update($validatedData);
+        return redirect()->route('backend.pesanan.proses')->with('success', 'Data berhasil
+        diperbaharui');
+    }
+
     public function addToCart($id)
     {
         $customer = Customer::where('user_id', Auth::id())->first();
@@ -369,5 +399,117 @@ class OrderController extends Controller
         }
 
         return response()->json(json_decode($response, true));
+    }
+    public function statusProses()
+    {
+        //backend
+        $order = Order::whereIn('status', ['Paid', 'Pending'])->orderBy('id', 'desc')->get();
+        return view('backend.v_pesanan.proses', [
+            'judul' => 'Pesanan',
+            'sub' => 'Pesanan Proses',
+            'index' => $order
+        ]);
+    }
+    public function statusSelesai()
+    {
+        //backend
+        $order = Order::where('status', 'Selesai')->orderBy('id', 'desc')->get();
+        return view('backend.v_pesanan.selesai', [
+            'judul' => 'Data Pesanan',
+            'sub' => 'Pesanan Selesai',
+            'index' => $order
+        ]);
+    }
+    public function statusDetail($id)
+    {
+        $order = Order::findOrFail($id);
+        return view('backend.v_pesanan.detail', [
+            'judul' => 'Data Pesanan',
+            'sub' => 'Pesanan Detail',
+            'order' => $order,
+        ]);
+    }
+    public function formOrderProses()
+    {
+        return view('backend.v_pesanan.formproses', [
+            'judul' => 'Laporan',
+            'sub' => 'Laporan Pesanan Proses',
+        ]);
+    }
+    public function cetakOrderProses(Request $request)
+    {
+        // Menambahkan aturan validasi
+        $request->validate([
+            'tanggal_awal' => 'required|date',
+            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
+        ], [
+            'tanggal_awal.required' => 'Tanggal Awal harus diisi.',
+            'tanggal_akhir.required' => 'Tanggal Akhir harus diisi.',
+            'tanggal_akhir.after_or_equal' => 'Tanggal Akhir harus lebih besar atau sama
+dengan Tanggal Awal.',
+        ]);
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
+        $order = Order::whereIn('status', ['Paid', 'Kirim'])->orderBy('id', 'desc')->get();
+        return view('backend.v_pesanan.cetakproses', [
+            'judul' => 'Laporan',
+            'subJudul' => 'Laporan Pesanan Proses',
+            'tanggalAwal' => $tanggalAwal,
+            'tanggalAkhir' => $tanggalAkhir,
+            'cetak' => $order
+        ]);
+    }
+    public function formOrderSelesai()
+    {
+        return view('backend.v_pesanan.formselesai', [
+            'judul' => 'Laporan',
+            'sub' => 'Laporan Pesanan Selesai',
+        ]);
+    }
+    public function cetakOrderSelesai(Request $request)
+    {
+        // Menambahkan aturan validasi
+        $request->validate([
+            'tanggal_awal' => 'required|date',
+            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
+        ], [
+            'tanggal_awal.required' => 'Tanggal Awal harus diisi.',
+            'tanggal_akhir.required' => 'Tanggal Akhir harus diisi.',
+            'tanggal_akhir.after_or_equal' => 'Tanggal Akhir harus lebih besar atau sama
+dengan Tanggal Awal.',
+        ]);
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
+        $order = Order::where('status', 'Selesai')
+            ->whereBetween('created_at', [$tanggalAwal, $tanggalAkhir])
+            ->orderBy('id', 'desc')
+            ->get();
+        $totalPendapatan = $order->sum(function ($row) {
+            return $row->total_harga + $row->biaya_ongkir;
+        });
+        return view(
+            'backend.v_pesanan.cetakselesai',
+            [
+                'judul' => 'Laporan',
+                'sub' => 'Laporan Pesanan Selesai',
+                'tanggalAwal' => $tanggalAwal,
+                'tanggalAkhir' => $tanggalAkhir,
+                'cetak' => $order,
+                'totalPendapatan' => $totalPendapatan
+            ]
+        );
+    }
+    public function invoiceBackend($id)
+    {
+        $order = Order::findOrFail($id);
+        return view('backend.v_pesanan.invoice', [
+            'judul' => 'Data Pesanan',
+            'sub' => 'Pesanan Proses',
+            'order' => $order,
+        ]);
+    }
+    public function show(string $id)
+    {
+        //
     }
 }

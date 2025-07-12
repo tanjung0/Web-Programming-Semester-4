@@ -18,6 +18,6 @@ class IsCustomer
         if (auth()->check() && auth()->user()->role == 2) {
             return $next($request);
         }
-        return redirect('/auth/redirect')->with('msgError', 'Anda harus login sebagai customer');
+        return redirect()->route('backend.login')->with('msgError', 'Anda harus login sebagai customer');
     }
 }

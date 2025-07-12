@@ -18,7 +18,7 @@ class BerandaController extends Controller
     {
         $produk = Produk::where('status', 1)->orderBy('updated_at', 'desc')->paginate(3);
         return view('v_beranda.index', [
-            'judul' => 'Halan Beranda',
+            'judul' => 'Halaman Beranda',
             'produk' => $produk,
         ]);
     }

@@ -42,7 +42,7 @@
             <div class="auth-box bg-dark border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
-                        <span class="db"><img src="{{asset('image/logo.png') }}" alt="logo" width="40%" /></span>
+                        <span class="db"><img src="{{asset('image/logo_gerabah.jpg') }}" alt="logo" width="40%" style="border-radius: 10px"/></span>
                     </div>
 
                     
@@ -86,6 +86,8 @@
                                     </span>
                                     @enderror
                                 </div>
+                                <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button>
+                                <button class="btn btn-success float-right" type="submit">Login</button>
                             </div>
                         </div>
 
@@ -94,8 +96,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="p-t-20">
-                                        <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button>
-                                        <button class="btn btn-success float-right" type="submit">Login</button>
+                                        <span style="margin-left: 100px" class="text-white">Apakah Belum Punya Akun?</span>
+                                        <a href="{{ route('auth.redirect') }}" class="btn btn-success float-right">Sign Up</a>
                                     </div>
                                 </div>
                             </div>

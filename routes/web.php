@@ -38,6 +38,14 @@ Route::delete('foto-produk/{id}', [ProdukController::class, 'destroyFoto'])->nam
 // Route untuk laporan produk
 Route::get('backend/laporan/formproduk', [ProdukController::class, 'formProduk'])->name('backend.laporan.formproduk')->middleware('auth');
 Route::post('backend/laporan/cetakproduk', [ProdukController::class, 'cetakProduk'])->name('backend.laporan.cetakproduk')->middleware('auth');
+// Route untuk laporan pesanan
+Route::resource('backend/pesanan', OrderController::class, ['as' => 'backend'])->middleware('auth');
+Route::get('backend/Pesanan/Proses', [OrderController::class, 'statusProses'])->name('backend.pesanan.proses')->middleware('auth');
+Route::get('backend/Pesanan/Selesai', [OrderController::class, 'statusSelesai'])->name('backend.pesanan.selesai')->middleware('auth');
+Route::get('backend/Pesanan/Detail/{id}', [OrderController::class, 'statusDetail'])->name('pesanan.detail');
+Route::put('backend/Pesanan/Update/{id}', [OrderController::class, 'statusUpdate'])->name('pesanan.update');
+Route::get('backend/Pesanan/invoice', [OrderController::class, 'invoiceBackend'])->name('pesanan.invoice');
+
 
 // Frontend
 Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
