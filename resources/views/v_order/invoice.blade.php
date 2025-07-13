@@ -39,9 +39,9 @@
             <h5>Pelanggan</h5>
             <address>
                 Nama: {{ $order->customer->user->nama }}<br>
-                Email: {{ $order->customer->email }}<br>
-                Hp: {{ $order->customer->hp }}<br>
-                Alamat: <br>{!! $order->alamat !!} <br>
+                Email: {{ $order->customer->user->email }}<br>
+                Hp: {{ $order->customer->user->hp }}<br>
+                Alamat: {{ $order->alamat }} <br>
                 Kode Pos: {{ $order->pos }}
             </address>
         </td>
@@ -56,7 +56,7 @@
                 Kurir: {{ $order->kurir }}<br>
                 Layanan: {{ $order->layanan_ongkir }}<br>
                 Estimasi: {{ $order->estimasi_ongkir }} Hari<br>
-                Berat: {{ $order->total_berat }} Gram<br>
+                Berat: {{ $order->total_berat }} Kg<br>
             </address>
         </td>
     </tr>

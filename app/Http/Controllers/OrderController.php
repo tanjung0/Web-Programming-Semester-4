@@ -51,8 +51,12 @@ class OrderController extends Controller
 
         $order = Order::firstOrCreate(
             ['customer_id' => $customer->id, 'status' => 'pending'],
-            ['total_harga' => 0]
+            [
+                'total_harga' => 0,
+                'user_id' => Auth::id()
+            ]
         );
+
 
         $orderItem = OrderItem::firstOrCreate(
             ['order_id' => $order->id, 'produk_id' => $produk->id],
@@ -163,7 +167,7 @@ class OrderController extends Controller
             $order->biaya_ongkir    = $request->input('biaya_ongkir');
             $order->estimasi_ongkir = $request->input('estimasi_ongkir');
             $order->total_berat     = $request->input('total_berat');
-            $order->alamat          = $request->input('alamat') . ', <br>' . $request->input('city_name') . ', <br>' . $request->input('province_name');
+            $order->alamat          = $request->input('alamat') . ' ' . $request->input('city_name') . ' ' . $request->input('province_name');
             $order->pos = $request->input('pos');
             $order->save();
 

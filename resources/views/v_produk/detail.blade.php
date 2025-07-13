@@ -61,7 +61,7 @@
                     <div class="product-options">
                         <ul class="size-option">
                             <li><span class="text-uppercase">Berat:</span></li>
-                            {{ $row->berat }} Gram
+                            {{ $row->berat }} Kg
                         </ul>
                         <ul class="size-option">
                             <li><span class="text-uppercase">Stok:</span></li>

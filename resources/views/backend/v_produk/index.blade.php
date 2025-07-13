@@ -47,7 +47,7 @@
                                         <td> Rp. {{ number_format($row->harga_lama, 0, ',', '.') }}
                                         </td>
                                         <td> {{ $row->stok }} </td>
-                                        <td> {{ $row->berat }} Gram</td>
+                                        <td> {{ $row->berat }} Kg</td>
                                         <td>
                                             <a href="{{ route('backend.produk.edit', $row->id) }}" title="Ubah Data">
                                                 <button type="button" class="btn btn-cyan btn-sm"><i

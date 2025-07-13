@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
         #untuk record berikutnya silahkan, beri nilai berbeda pada nilai: nama, email, hp dengan nilai masing-masing anggota kelompok
         User::create([
-            'nama' => 'Tanjung Ashari',
+            'nama' => 'Admin Tanjung Ashari',
             'email' => 'admintanjung@gmail.com',
             'role' => '0',
             'status' => 1,
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('tanjung'),
         ]);
         User::create([
-            'nama' => 'Farel Harin Al Ghifari',
+            'nama' => 'Admin Farel Harin Al Ghifari',
             'email' => 'adminfarel@gmail.com',
             'role' => '0',
             'status' => 1,
@@ -40,7 +40,13 @@ class DatabaseSeeder extends Seeder
         ]);
         #data kategori
         Kategori::create([
-            'nama_kategori' => 'Gerabah',
+            'nama_kategori' => 'Perabotan Makan',
+        ]);
+        Kategori::create([
+            'nama_kategori' => 'Dekorasi',
+        ]);
+        Kategori::create([
+            'nama_kategori' => 'Alat Masak',
         ]);
     }
 }

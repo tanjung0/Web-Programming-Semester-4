@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->string('status');
             $table->string('noresi')->nullable();
             $table->string('kurir')->nullable();
             $table->string('layanan_ongkir')->nullable();
             $table->string('biaya_ongkir')->nullable();
             $table->string('estimasi_ongkir')->nullable();
-            $table->integer('total_berat')->nullable();
+            $table->float('total_berat')->nullable();
             $table->double('total_harga');
             $table->text('alamat')->nullable();
             $table->string('pos')->nullable();

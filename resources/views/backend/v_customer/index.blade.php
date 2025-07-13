@@ -5,12 +5,12 @@
     <div class="row">
 
         <div class="col-12">
-            <a href="{{ route('backend.customer.create') }}">
+            {{-- <a href="{{ route(name: 'backend.customer.create') }}">
                 <button type="button" class="btn btn-outline-primary">Tambah</button>
-            </a>
+            </a> --}}
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"> {{ $judul }} </h5>
+                    {{-- <h5 class="card-title"> {{ $judul }} </h5> --}}
                     <div class="table-responsive">
                         <table id="zero_config" class="table table-striped table-bordered">
                             <thead>
