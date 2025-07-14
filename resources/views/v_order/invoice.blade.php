@@ -91,8 +91,8 @@
             <td class="details">
                 <a>{{ $item->produk->nama_produk }} #{{ $item->produk->kategori->nama_kategori }}</a>
                 <ul>
-                    <li><span>Berat: {{ $item->produk->berat }} Gram</span></li>
-                    <li><span>Stok: {{ $item->produk->stok }} Gram</span></li>
+                    <li><span>Berat: {{ $item->produk->berat }} Kg</span></li>
+                    {{-- <li><span>Stok: {{ $item->produk->stok }} </span></li> --}}
                 </ul>
             </td>
             <td class="price text-center">Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>

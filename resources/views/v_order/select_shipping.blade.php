@@ -180,7 +180,7 @@
                             <td>${sv.service} - ${sv.description}</td>
                             <td>Rp${sv.cost.toLocaleString()}</td>
                             <td class="text-center">${sv.etd}</td>
-                            <td>${weight} Gram</td>
+                            <td>${weight} Kg</td>
                             <td>Rp. {{ number_format($totalHarga, 0, ',', '.') }}</td>
                             <td>
                                 <form action="{{ route('order.update-ongkir') }}" method="post">
